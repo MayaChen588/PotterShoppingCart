@@ -18,21 +18,27 @@ namespace PotterShoppingCart.BLL.Tests
 
             // act
             var expented = 100;
-            var actual = target.CalTotalAmount(1);
+            IDictionary<string, int> buyItem = new Dictionary<string, int>();
+            buyItem.Add("PotterBook-1", 1);
+
+            var actual = target.CalTotalAmount(buyItem);
             // assert
 
             Assert.AreEqual(expented, actual);
         }
 
         [TestMethod()]
-        public void Test_購買二本價格應為190元()
+        public void Test_購買不同二本價格應為190元()
         {
             // arrange
             var target = new ShoppingCart();
 
             // act
             var expented = 190;
-            var actual = target.CalTotalAmount(2);
+            IDictionary<string, int> buyItem = new Dictionary<string, int>();
+            buyItem.Add("PotterBook-1", 1);
+            buyItem.Add("PotterBook-2", 1);
+            var actual = target.CalTotalAmount(buyItem);
             // assert
 
             Assert.AreEqual(expented, actual);

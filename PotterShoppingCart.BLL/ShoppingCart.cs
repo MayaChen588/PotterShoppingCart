@@ -9,9 +9,41 @@ namespace PotterShoppingCart.BLL
     {
         private decimal _price = 100;
 
-        public decimal CalTotalAmount(int quantity)
+        public decimal CalTotalAmount(IDictionary<string, int> buyItem)
         {
-            return quantity * _price;
+            IDictionary<string, int> itemCnt = new Dictionary<string, int>();
+            decimal totalAmt = 0;
+
+
+            foreach (var item in buyItem)
+            {
+                if (itemCnt.ContainsKey(item.Key))
+                {
+                    itemCnt[item.Key] += itemCnt[item.Key];
+                }
+                else
+                {
+                    itemCnt.Add(item.Key, item.Value);
+                }
+            }
+
+            foreach (var item in itemCnt)
+            {
+                if (itemCnt.Count == 1)
+                {
+                    totalAmt += item.Value * _price;
+                }
+                else if (itemCnt.Count == 2)
+                {
+                    totalAmt += item.Value * _price * (decimal)(1 - 0.05);
+                }
+                else
+                {
+                    totalAmt += item.Value * _price;
+                }
+            }
+
+            return totalAmt;
         }
     }
 }
