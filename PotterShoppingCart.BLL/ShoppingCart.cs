@@ -17,43 +17,60 @@ namespace PotterShoppingCart.BLL
 
             foreach (var item in buyItem)
             {
-                if (itemCnt.ContainsKey(item.Key))
+                if (item.Value > 0)
                 {
-                    itemCnt[item.Key] += itemCnt[item.Key];
-                }
-                else
-                {
-                    itemCnt.Add(item.Key, item.Value);
+                    if (itemCnt.ContainsKey(item.Key))
+                    {
+                        itemCnt[item.Key] += itemCnt[item.Key];
+                    }
+                    else
+                    {
+                        itemCnt.Add(item.Key, item.Value);
+                    }
                 }
             }
 
-            foreach (var item in itemCnt)
+            while (itemCnt.Count > 0)
             {
-                if (itemCnt.Count == 1)
+                foreach (var item in itemCnt)
                 {
-                    totalAmt += item.Value * _price;
+                    if (itemCnt.Count == 1)
+                    {
+                        totalAmt += _price;
+                    }
+                    else if (itemCnt.Count == 2)
+                    {
+                        totalAmt += _price * (decimal)0.95;
+                    }
+                    else if (itemCnt.Count == 3)
+                    {
+                        totalAmt += _price * (decimal)0.9;
+                    }
+                    else if (itemCnt.Count == 4)
+                    {
+                        totalAmt += _price * (decimal)0.8;
+                    }
+                    else if (itemCnt.Count == 5)
+                    {
+                        totalAmt += _price * (decimal)0.75;
+                    }
+                    else
+                    {
+                        totalAmt += _price;
+                    }
                 }
-                else if (itemCnt.Count == 2)
+
+                foreach (var key in itemCnt.Keys.ToList())
                 {
-                    totalAmt += item.Value * _price * (decimal)0.95;
-                }
-                else if (itemCnt.Count == 3)
-                {
-                    totalAmt += item.Value * _price * (decimal)0.9;
-                }
-                else if (itemCnt.Count == 4)
-                {
-                    totalAmt += item.Value * _price * (decimal)0.8;
-                }
-                else if (itemCnt.Count == 5)
-                {
-                    totalAmt += item.Value * _price * (decimal)0.75;
-                }
-                else
-                {
-                    totalAmt += item.Value * _price;
+                    itemCnt[key] -= 1;
+
+                    if (itemCnt[key] == 0)
+                    {
+                        itemCnt.Remove(key);
+                    }
                 }
             }
+
 
             return totalAmt;
         }
