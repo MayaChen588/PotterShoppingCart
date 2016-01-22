@@ -81,5 +81,26 @@ namespace PotterShoppingCart.BLL.Tests
 
             Assert.AreEqual(expented, actual);
         }
+
+
+        [TestMethod()]
+        public void Test_購買不同五本價格應為375元()
+        {
+            // arrange
+            var target = new ShoppingCart();
+
+            // act
+            var expented = 375;
+            IDictionary<string, int> buyItem = new Dictionary<string, int>();
+            buyItem.Add("PotterBook-1", 1);
+            buyItem.Add("PotterBook-2", 1);
+            buyItem.Add("PotterBook-3", 1);
+            buyItem.Add("PotterBook-4", 1);
+            buyItem.Add("PotterBook-5", 1);
+            var actual = target.CalTotalAmount(buyItem);
+            // assert
+
+            Assert.AreEqual(expented, actual);
+        }
     }
 }
