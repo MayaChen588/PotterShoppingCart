@@ -41,6 +41,10 @@ namespace PotterShoppingCart.BLL
                 {
                     totalAmt += item.Value * _price * (decimal)0.9;
                 }
+                else if (itemCnt.Count == 4)
+                {
+                    totalAmt += item.Value * _price * (decimal)0.8;
+                }
                 else
                 {
                     totalAmt += item.Value * _price;
