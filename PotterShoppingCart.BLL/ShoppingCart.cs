@@ -14,6 +14,7 @@ namespace PotterShoppingCart.BLL
             IDictionary<string, int> itemCnt = new Dictionary<string, int>();
             decimal totalAmt = 0;
 
+            int x = 100;
 
             foreach (var item in buyItem)
             {
