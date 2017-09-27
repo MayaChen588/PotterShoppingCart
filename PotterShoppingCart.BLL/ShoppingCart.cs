@@ -15,6 +15,7 @@ namespace PotterShoppingCart.BLL
             decimal totalAmt = 0;
 
             int x = 100;
+            int y = 200;
 
             foreach (var item in buyItem)
             {
